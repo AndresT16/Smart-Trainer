@@ -10,7 +10,7 @@ def calcular_angulo(a,b,c):
     b = np.array(b) # Medio
     c = np.array(c) # Final
     radianes = np.arctan2(c[1] - b[1], c[0] - b[0]) - np.arctan2(a[1] - b[1], a[0] - b[0])
-    angulo = np.abs(radians * 180.0 / np.pi)
+    angulo = np.abs(radianes * 180.0 / np.pi)
 
     if angulo > 180.0:
         angulo = 360 - angulo
@@ -43,7 +43,7 @@ with mp_pose.Pose(min_detection_confidence=0.5,min_tracking_confidence=0.5) as p
             munieca = [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x,
                      landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].y]
             # Calcular ángulo
-            angulo = calcular_angulo(hombro, codo, muñeca)
+            angulo = calcular_angulo(hombro, codo, munieca)
 
             # Visualizar ángulo
             cv2.putText(imagen, str(angulo),
