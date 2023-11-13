@@ -8,7 +8,7 @@ deteccion_pose = mp.solutions.pose
 # transmision de video
 captura = cv2.VideoCapture(0)
 #Configurar mediapipe instancia 
-with deteccion_pose.Pose(min_deteccion_segura=0.5,min_seguimiento_segura=0.5) as pose:
+with deteccion_pose.Pose(min_detection_confidence=0.5,min_tracking_confidence=0.5) as pose:
     while captura.isOpened():
         retorno, frame = captura.read()
         #Recolorear imagen a RGB
