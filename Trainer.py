@@ -18,6 +18,7 @@ with mp_pose.Pose(min_detection_confidence=0.5,min_tracking_confidence=0.5) as p
         resultado = pose.process(imagen)
         #Recolorear de nuevo a BGR
         imagen.flags.writeable = True
+        imagen = cv2.cvtColor(imagen, cv2.COLOR_RGB2BGR)
         #Deteccion de renderizado 
         mp_dibujo.draw_landmarks(imagen,resultado.pose_landmarks, mp_pose.POSE_CONNECTIONS,
                                  mp_dibujo.DrawingSpec(color=(245,117,66), thickness= 2, circle_radius=2),
