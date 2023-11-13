@@ -5,6 +5,18 @@ import numpy as np
 mp_dibujo = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
+def calcular_angulo(a,b,c):
+    a = np.array(a) # Primero
+    b = np.array(b) # Medio
+    c = np.array(c) # Final
+    radianes = np.arctan2(c[1] - b[1], c[0] - b[0]) - np.arctan2(a[1] - b[1], a[0] - b[0])
+    angulo = np.abs(radians * 180.0 / np.pi)
+
+    if angulo > 180.0:
+        angulo = 360 - angulo
+
+    return angulo
+
 # transmision de video
 captura = cv2.VideoCapture(0)
 #Configurar mediapipe instancia 
