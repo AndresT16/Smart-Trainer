@@ -40,13 +40,13 @@ with mp_pose.Pose(min_detection_confidence=0.5,min_tracking_confidence=0.5) as p
                         landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y]
             codo = [landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].x,
                      landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].y]
-            muñeca = [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x,
+            munieca = [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x,
                      landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].y]
             # Calcular ángulo
-            angle = calcular_angulo(hombro, codo, muñeca)
+            angulo = calcular_angulo(hombro, codo, muñeca)
 
             # Visualizar ángulo
-            cv2.putText(imagen, str(angle),
+            cv2.putText(imagen, str(angulo),
                         tuple(np.multiply(codo, [640, 480]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
@@ -55,9 +55,9 @@ with mp_pose.Pose(min_detection_confidence=0.5,min_tracking_confidence=0.5) as p
         #Deteccion de renderizado 
         mp_dibujo.draw_landmarks(imagen,resultado.pose_landmarks, mp_pose.POSE_CONNECTIONS,
                                  mp_dibujo.DrawingSpec(color=(245,117,66), thickness= 2, circle_radius=2),
-                                 mp_dibujo.DrawingSpec(color=(245,117,66), thickness= 2, circle_radius=2))
-        cv2.imshow("Mediapipe Feed",frame)
-        if cv2.waitKey(10) & 0xFF == ord("s"):
+                                 mp_dibujo.DrawingSpec(color=(245,66,230), thickness= 2, circle_radius=2))
+        cv2.imshow("Mediapipe Feed",imagen)
+        if cv2.waitKey(10) & 0xFF == ord("x"):
             break
 captura.release()
 cv2.destroyAllWindows()    
