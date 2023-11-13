@@ -23,7 +23,7 @@ with deteccion_pose.Pose(min_deteccion_segura=0.5,min_seguimiento_segura=0.5) as
                                  dibujo.DrawingSpec(color=(245,117,66), thickness= 2, circle_radius=2),
                                  dibujo.DrawingSpec(color=(245,117,66), thickness= 2, circle_radius=2))
         cv2.imshow("Mediapipe Feed",frame)
-        if cv2.waitKey(10) & 0xFF == ord("q"):
+        if cv2.waitKey(10) & 0xFF == ord("s"):
             break
 captura.release()
 cv2.destroyAllWindows()    
