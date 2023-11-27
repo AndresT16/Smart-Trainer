@@ -18,6 +18,11 @@ def calcular_angulo(a,b,c):
 
 # transmision de video
 captura = cv2.VideoCapture(0)
+
+# Variables del contador de flexor
+contador = 0 
+estado = None
+
 #Configurar mediapipe instancia 
 with mp_pose.Pose(min_detection_confidence=0.5,min_tracking_confidence=0.5) as pose:
     while captura.isOpened():
@@ -50,8 +55,37 @@ with mp_pose.Pose(min_detection_confidence=0.5,min_tracking_confidence=0.5) as p
                         tuple(np.multiply(codo, [640, 480]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
+            
+            # logica del contador de flexor de bicep
+            if angle > 160:
+                estado = "abajo"
+            if angle < 30 and estado =='abajo':
+                estado="arriba"
+                contador +=1
+                print(contador)
+
         except:
             pass
+            
+             # Mostrar por pantalla los datos 
+        # Planteando un rectangulo
+        cv2.rectangle(image, (0,0), (225,73), (0,128,0), -1)
+        
+        # Dato Repeticion
+        cv2.putText(image, 'REP', (15,12), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+        cv2.putText(image, str(contador), 
+                    (10,60), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255,255,255), 2, cv2.LINE_AA)
+        
+        # Dato Estado
+        cv2.putText(image, 'ESTADO', (65,12), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+        cv2.putText(image, estado, 
+                    (60,60), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255,255,255), 2, cv2.LINE_AA)
+
+        
         #Deteccion de renderizado 
         mp_dibujo.draw_landmarks(imagen,resultado.pose_landmarks, mp_pose.POSE_CONNECTIONS,
                                  mp_dibujo.DrawingSpec(color=(245,117,66), thickness= 2, circle_radius=2),
