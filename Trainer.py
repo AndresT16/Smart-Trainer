@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
-mp_dibujo = mp.solutions.drawing_utils
+mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
 def calcular_angulo(a,b,c):
@@ -57,9 +57,9 @@ with mp_pose.Pose(min_detection_confidence=0.5,min_tracking_confidence=0.5) as p
                         )
             
             # logica del contador de flexor de bicep
-            if angle > 160:
+            if angulo > 160:
                 estado = "abajo"
-            if angle < 30 and estado =='abajo':
+            if angulo < 30 and estado =='abajo':
                 estado="arriba"
                 contador +=1
                 print(contador)
