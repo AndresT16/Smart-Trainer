@@ -76,21 +76,21 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
         # Mostrar por pantalla los datos 
         # Planteando un rectángulo
-        cv2.rectangle(imagen, (0,0), (225,73), (0,128,0), -1)
-        
+        cv2.rectangle(imagen, (0,0), (225,73), (245,117,66), -1)
+
         # Dato Repetición
-        cv2.putText(imagen, 'REP', (15,12), 
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-        cv2.putText(imagen, str(contador), 
-                    (10,60), 
-                    cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255,255,255), 2, cv2.LINE_AA)
-        
+        cv2.putText(imagen, 'REP', (15, 12),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
+        cv2.putText(imagen, str(contador),
+                    (10, 60),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2, cv2.LINE_AA)
+
         # Dato Estado
-        cv2.putText(imagen, 'ESTADO', (65,12), 
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-        cv2.putText(imagen, estado, 
-                    (60,60), 
-                    cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255,255,255), 2, cv2.LINE_AA)
+        cv2.putText(imagen, 'ESTADO', (65, 12),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
+        cv2.putText(imagen, estado,
+                    (60, 60),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2, cv2.LINE_AA)
 
         cv2.putText(imagen, f'FPS: {int(fps)}',
                     (500, 20),
