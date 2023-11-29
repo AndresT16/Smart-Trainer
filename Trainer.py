@@ -1,9 +1,11 @@
 import cv2
 import mediapipe as mp
 import numpy as np
+import time
 
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
+pTime = 0
 
 def calcular_angulo(a, b, c):
     a = np.array(a)  # Inicio
@@ -23,6 +25,9 @@ cap = cv2.VideoCapture(0)
 # Variables del contador de flexor
 contador = 0 
 estado = None
+
+#fps variable
+fps = 0
 
 ## Configurar instancia de Mediapipe
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -86,6 +91,10 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         cv2.putText(imagen, estado, 
                     (60,60), 
                     cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255,255,255), 2, cv2.LINE_AA)
+
+        cv2.putText(imagen, f'FPS: {int(fps)}',
+                    (500, 20),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
         
         # Detección de renderizado 
         mp_drawing.draw_landmarks(imagen, resultados.pose_landmarks, mp_pose.POSE_CONNECTIONS,
@@ -97,6 +106,10 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
         if cv2.waitKey(10) & 0xFF == ord('x'):
             break
+        # Calcular fps
+        cTime = time.time()
+        fps = 1 / (cTime - pTime)
+        pTime = cTime    
 
     cap.release()
     cv2.destroyAllWindows()
