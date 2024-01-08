@@ -37,7 +37,12 @@ def calcular_angulo(a, b, c):
         angulo = 360 - angulo
     return angulo
 
-cap = cv2.VideoCapture(1)
+# Solicitar al usuario que introduzca el índice de la cámara
+indice_camara = simpledialog.askinteger(title="Smart Trainer",
+                                        prompt="Por favor, introduce el índice de la cámara que deseas usar:")
+
+# Utilizar el índice de la cámara proporcionado por el usuario
+cap = cv2.VideoCapture(indice_camara)
 
 # Variables del contador de flexor
 contador = 0
